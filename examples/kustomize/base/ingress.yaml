@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-load-balancer
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/configuration-snippet: REPLACED_BY_KUSTOMIZE_PATCH
+spec:
+  tls:
+  - hosts:
+    - REPLACED_BY_KUSTOMIZE_PATCH
+    secretName: tls-secret
+  rules:
+    - host: REPLACED_BY_KUSTOMIZE_PATCH
+      http:
+        paths:
+          - path: /(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80

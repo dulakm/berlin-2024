@@ -1,0 +1,7 @@
+[
+    {
+        "op": "replace",
+        "path": "/metadata/annotations/nginx.ingress.kubernetes.io~1configuration-snippet",
+        "value": "access_by_lua_block { \n    local http_method = ngx.var.request_method \n    local f=io.open(\"/etc/config/maintenance\",\"r\") \n    local token = ngx.var.cookie_DEVELOPER_SECRET \n    if f~=nil and token ~= \"MyToken\" and http_method ~= \"OPTIONS\" then \n        io.close(f) \n        ngx.header[\"access-control-allow-origin\"] = \"https://my.domain\" \n        ngx.header[\"access-control-allow-credentials\"] = \"true\" \n        ngx.exit(ngx.HTTP_SERVICE_UNAVAILABLE) \n        end \n}"
+    }
+]

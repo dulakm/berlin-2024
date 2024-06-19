@@ -1,0 +1,7 @@
+- op: replace
+  path: /spec/tls/0/hosts
+  value:
+    - my.domain
+- op: replace
+  path: /spec/rules/0/host
+  value: my.domain
